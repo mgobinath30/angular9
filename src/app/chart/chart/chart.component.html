@@ -1,0 +1,26 @@
+<div *ngIf="!isChecked">
+<mat-form-field appearance="fill">
+    <mat-label>Battery module</mat-label>  
+  <mat-select (selectionChange)="battertModuleChange($event.value)">
+      <mat-option *ngFor="let chart of this.chartdata;let i = index" [value]="i" selected=" i == 0">
+        Battery module - {{chart.tid}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+  <div class="right"><mat-slide-toggle (change)="changeView()" [(ngModel)]="isChecked">Combined View 
+
+  </mat-slide-toggle></div>
+
+<div *ngIf="!isChecked">
+<div class="chartCOntainer" *ngIf="data.length > 0">
+  <h1>Selected Battery Model - {{currentModel + 1}}</h1>
+  <plotly-plot [data]="data" [layout]="graph.layout"></plotly-plot>
+</div>
+</div>
+
+<div *ngIf="isChecked">
+  <app-combined-chart></app-combined-chart>
+</div>
